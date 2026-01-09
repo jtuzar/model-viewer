@@ -7,4 +7,5 @@ set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(model-viewer)
-add_executable(model-viewer src/main.cpp)
+add_executable(model-viewer src/main.cpp src/test.cpp)
+target_include_directories(model-viewer PRIVATE includes)
