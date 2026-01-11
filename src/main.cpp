@@ -1,17 +1,18 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
+#include <filesystem>
 #include <iostream>
-#include <vector>
+#include "shader.hpp"
 
-int main(void) {
-    GLFWwindow *window;
+int main() {
+    GLFWwindow* window;
 
     if (!glfwInit()) {
         std::cout << "GLFW initialization error" << std::endl;
         return -1;
     }
 
-    window = glfwCreateWindow(640, 640, "model-viewer", NULL, NULL);
+    window = glfwCreateWindow(640, 640, "model-viewer", nullptr, nullptr);
 
     if (!window) {
         std::cout << "Failed to create glfw window" << std::endl;
@@ -30,8 +31,8 @@ int main(void) {
               << GLAD_VERSION_MINOR(version) << std::endl;
 
     const float vertices[]{
-        -0.5f, -0.5f, 0, //
-        0.5f,  -0.5f, 0, //
+        -0.5f, -0.5f, 0,  //
+        0.5f,  -0.5f, 0,  //
         0.0f,  0.5f,  0,
 
     };
@@ -44,12 +45,14 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    Shader shader{"shaders/default.vert", "shaders/default.frag"};
+
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

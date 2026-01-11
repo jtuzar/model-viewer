@@ -19,7 +19,7 @@ FetchContent_MakeAvailable(glfw)
 
 add_subdirectory(third_party)
 
-add_executable(model-viewer src/main.cpp)
+add_executable(model-viewer src/main.cpp src/shader.cpp)
 target_link_libraries(model-viewer glfw glad)
 target_include_directories(model-viewer PRIVATE src)
 
