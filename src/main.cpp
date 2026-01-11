@@ -10,7 +10,7 @@ int main(void) {
         return -1;
     }
 
-    window = glfwCreateWindow(640, 640, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 640, "model-viewer", NULL, NULL);
 
     if (!window) {
         std::cout << "Failed to create glfw window" << std::endl;

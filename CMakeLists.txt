@@ -17,6 +17,8 @@ GIT_TAG 7b6aead9fb88b3623e3b3725ebb42670cbe4c579 #3.4
 )
 FetchContent_MakeAvailable(glfw)
 
-add_executable(model-viewer src/main.cpp src/gl.c)
-target_link_libraries(model-viewer glfw)
-target_include_directories(model-viewer PRIVATE includes)
+add_subdirectory(third_party)
+
+add_executable(model-viewer src/main.cpp)
+target_link_libraries(model-viewer glfw glad)
+target_include_directories(model-viewer PRIVATE src)
