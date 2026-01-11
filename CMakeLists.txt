@@ -22,3 +22,11 @@ add_subdirectory(third_party)
 add_executable(model-viewer src/main.cpp)
 target_link_libraries(model-viewer glfw glad)
 target_include_directories(model-viewer PRIVATE src)
+
+add_custom_target(copy_assets ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/shaders
+        ${CMAKE_BINARY_DIR}/shaders
+
+    COMMENT "Copying assets to build directory"
+)
