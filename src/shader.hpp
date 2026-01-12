@@ -8,7 +8,8 @@
 class Shader {
    public:
     unsigned int ID_;
-    Shader(std::filesystem::path vert, std::filesystem::path frag);
+    Shader(std::filesystem::path vertexPath,
+           std::filesystem::path fragmentPath);
     void use();
     void setBool(const char* name, bool value);
     void setFloat(const char* name, float value);
