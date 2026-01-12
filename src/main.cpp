@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <filesystem>
 #include <iostream>
-#include "shader.hpp"
+#include <shader.hpp>
 
 int main() {
     GLFWwindow* window;
@@ -50,9 +50,12 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
 
+        shader.use();
+
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

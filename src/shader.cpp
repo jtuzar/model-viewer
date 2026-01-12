@@ -53,3 +53,20 @@ Shader::Shader(std::filesystem::path vertexPath,
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 };
+
+void Shader::use() {
+    glUseProgram(ID_);
+}
+
+void Shader::setBool(const char* name, bool value) {
+    const int unifromLocation = glGetAttribLocation(ID_, name);
+    glUniform1i(unifromLocation, value);
+};
+void Shader::setFloat(const char* name, float value) {
+    const int unifromLocation = glGetAttribLocation(ID_, name);
+    glUniform1f(unifromLocation, value);
+};
+void Shader::setInt(const char* name, int value) {
+    const int unifromLocation = glGetAttribLocation(ID_, name);
+    glUniform1i(unifromLocation, value);
+};

@@ -10,9 +10,9 @@ class Shader {
     unsigned int ID_;
     Shader(std::filesystem::path vert, std::filesystem::path frag);
     void use();
-    void setBool(bool value);
-    void setFloat(float value);
-    void setInt(int valude);
+    void setBool(const char* name, bool value);
+    void setFloat(const char* name, float value);
+    void setInt(const char* name, int value);
 
    private:
     void checkCompileErrors(unsigned int shader, std::string type) {
