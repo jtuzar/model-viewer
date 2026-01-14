@@ -94,8 +94,28 @@ CheckOptions:
   - key: misc-include-cleaner.IgnoreHeaders
     value: (gmock/gmock|gtest/gtest|third_party|build/linux/debian).*
 
+  # naming conventions
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: lowerCamel
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: "_"
+  - key: readability-identifier-naming.ConstantCase
+    value: kCamelCase
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+
+  - key: readability-identifier-naming.FunctionAllowedRegex
+    value: "^gl[A-Z].*|^vk[AA-Za-z0-9_]*|^ImGui_.*|^__.*|^main$"
+  - key: readability-identifier-naming.ClassAllowedRegex
+    value: "^GLFW.*|^GL.*|^KHR_.*|^Vk.*"
+  - key: readability-identifier-naming.MacroAllowedRegex
+    value: "^GL_.*|^KHR_.*|^[A-Z0-9_]+$"
+
 ExtraArgs:
   # b/382774818: disable unknown pragma warnings until we can figure out why
   # unknown pragmas are being warned about.
   - -Wno-unknown-pragmas
-...
