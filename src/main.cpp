@@ -1,25 +1,12 @@
 #include <glad/gl.h>
+#include "platform/window.hpp"
 #include <GLFW/glfw3.h>
 #include <filesystem>
 #include <iostream>
 #include <shader.hpp>
 
 int main() {
-    GLFWwindow* window;
-
-    if (!glfwInit()) {
-        std::cout << "GLFW initialization error" << std::endl;
-        return -1;
-    }
-
-    window = glfwCreateWindow(640, 640, "model-viewer", nullptr, nullptr);
-
-    if (!window) {
-        std::cout << "Failed to create glfw window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
+    Window window{640, 640, "model-viewer", nullptr, nullptr};
 
     int version = gladLoadGL(glfwGetProcAddress);
     if (version == 0) {
@@ -47,7 +34,7 @@ int main() {
 
     Shader shader{"shaders/default.vert", "shaders/default.frag"};
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window.getGLFWHandle())) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         shader.use();
@@ -59,10 +46,9 @@ int main() {
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(window.getGLFWHandle());
         glfwPollEvents();
     }
 
-    glfwTerminate();
     return 0;
 }

@@ -18,9 +18,10 @@ GIT_TAG 7b6aead9fb88b3623e3b3725ebb42670cbe4c579 #3.4
 FetchContent_MakeAvailable(glfw)
 
 add_subdirectory(third_party)
+add_subdirectory(src/platform)
 
 add_executable(model-viewer src/main.cpp src/shader.cpp)
-target_link_libraries(model-viewer glfw glad)
+target_link_libraries(model-viewer glfw glad platform)
 target_include_directories(model-viewer PRIVATE src)
 
 add_custom_target(copy_assets ALL

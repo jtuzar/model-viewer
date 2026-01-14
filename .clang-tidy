@@ -42,7 +42,8 @@ Checks: "-*,
   modernize-use-nullptr,
   modernize-use-override,
   modernize-use-transparent-functors,
-  readability-redundant-member-init"
+  readability-redundant-member-init,
+  readability-identifier-naming"
 # DISABLED CHECKS:
 # An analysis was done of the following checks and they were deemed to either
 # have too high of a false positive rate, or were redundant/useless (e.g.

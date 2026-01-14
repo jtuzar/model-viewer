@@ -4,24 +4,7 @@ TabWidth: 4
 UseTab: Never
 ColumnLimit: 100
 
-SortIncludes: true
-IncludeCategories:
-  - Regex: "^glad(/|$)"
-    Priority: 1
-
-  - Regex: "^GLFW/glfw3.h$"
-    Priority: 2
-
-  - Regex: '^\"'
-    Priority: 3
-
-  - Regex: "^(third_party/|<.*third_party/)"
-    Priority: 4
-
-  - Regex: ".*"
-    Priority: 5
-IncludeIsMainRegex: '(^|/)(test_|.*_test)\.cpp$' # treat *_test.cpp as main includes if needed
-
+SortIncludes: false
 BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: Inline
 DerivePointerAlignment: false
