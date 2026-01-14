@@ -1,7 +1,7 @@
 #pragma once
-#define WINDOW_H
 
-#include "GLFW/glfw3.h"
+#include "window_context.hpp"
+#include <GLFW/glfw3.h>
 
 class Window {
    public:
@@ -9,9 +9,15 @@ class Window {
            unsigned int height,
            const char* title,
            GLFWmonitor* monitor,
-           GLFWwindow* share);
+           GLFWwindow* share,
+           WindowContext& windowContext);
+
     ~Window();
-    GLFWwindow* getGLFWHandle() const { return glfwWindow_; };
+    Window(const Window&) = delete;
+    Window& operator=(const Window&) = delete;
+
+    void swapBuffers() const;
+    bool shouldClose() const;
 
    private:
     GLFWwindow* glfwWindow_;

@@ -8,20 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
-
-FetchContent_Declare(
-glfw
-GIT_REPOSITORY https://github.com/glfw/glfw
-GIT_TAG 7b6aead9fb88b3623e3b3725ebb42670cbe4c579 #3.4
-)
-FetchContent_MakeAvailable(glfw)
-
 add_subdirectory(third_party)
 add_subdirectory(src/platform)
 
 add_executable(model-viewer src/main.cpp src/shader.cpp)
-target_link_libraries(model-viewer glfw glad platform)
+target_link_libraries(model-viewer platform)
 target_include_directories(model-viewer PRIVATE src)
 
 add_custom_target(copy_assets ALL

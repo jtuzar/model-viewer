@@ -1,25 +1,48 @@
+#include <glad/gl.h>
 #include "window.hpp"
+#include <stdexcept>
+
+#ifdef DEBUG
 #include <iostream>
+#endif  // !DEBUG
 
 Window::Window(unsigned int width,
                unsigned int height,
                const char* title,
                GLFWmonitor* monitor,
-               GLFWwindow* share) {
-    if (!glfwInit()) {
-        std::cout << "GLFW initialization error" << std::endl;
-    }
-
-    glfwWindow_ = glfwCreateWindow(640, 640, title, monitor, share);
+               GLFWwindow* share,
+               WindowContext& windowContext) {
+    glfwWindow_ = glfwCreateWindow(width, height, title, monitor, share);
 
     if (!glfwWindow_) {
-        std::cout << "Failed to create glfw window" << std::endl;
         glfwTerminate();
+        throw std::runtime_error("Failed to create GLFW window");
     }
 
     glfwMakeContextCurrent(glfwWindow_);
-};
+
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0) {
+        glfwDestroyWindow(glfwWindow_);
+        glfwWindow_ = nullptr;
+        throw std::runtime_error("Failed to initialize OpenGL context");
+    }
+#ifdef DEBUG
+    std::cout << "Loaded OpenGL " << GLAD_VERSION_MAJOR(version) << "."
+              << GLAD_VERSION_MINOR(version) << std::endl;
+
+    isInitialized_ = true;
+#endif  // DEBUG
+}
 
 Window::~Window() {
-    glfwTerminate();
+    glfwDestroyWindow(glfwWindow_);
+}
+
+void Window::swapBuffers() const {
+    glfwSwapBuffers(glfwWindow_);
+}
+
+bool Window::shouldClose() const {
+    return glfwWindowShouldClose(glfwWindow_);
 }

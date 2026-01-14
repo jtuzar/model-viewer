@@ -1,12 +1,10 @@
 #include <glad/gl.h>
-#include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <shader.hpp>
 
-Shader::Shader(std::filesystem::path vertexPath,
-               std::filesystem::path fragmentPath) {
+Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath) {
     std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;
@@ -29,8 +27,9 @@ Shader::Shader(std::filesystem::path vertexPath,
         vertexCode = vShaderStream.str();
         fragmentCode = fShaderStream.str();
     } catch (std::ifstream::failure& e) {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what()
-                  << std::endl;
+#ifdef DEBUG
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+#endif  // DEBUG
     }
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
@@ -39,18 +38,24 @@ Shader::Shader(std::filesystem::path vertexPath,
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode, nullptr);
     glCompileShader(vertex);
+#ifdef DEBUG
     checkCompileErrors(vertex, "VERTEX");
+#endif  // DEBUG
 
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fShaderCode, nullptr);
     glCompileShader(fragment);
+#ifdef DEBUG
     checkCompileErrors(fragment, "FRAGMENT");
+#endif  // DEBUG
 
     ID_ = glCreateProgram();
     glAttachShader(ID_, vertex);
     glAttachShader(ID_, fragment);
     glLinkProgram(ID_);
+#ifdef DEBUG
     checkCompileErrors(ID_, "PROGRAM");
+#endif  // DEBUG
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 };
@@ -60,14 +65,14 @@ void Shader::use() {
 }
 
 void Shader::setBool(const char* name, bool value) {
-    const int unifromLocation = glGetAttribLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(ID_, name);
     glUniform1i(unifromLocation, value);
 };
 void Shader::setFloat(const char* name, float value) {
-    const int unifromLocation = glGetAttribLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(ID_, name);
     glUniform1f(unifromLocation, value);
 };
 void Shader::setInt(const char* name, int value) {
-    const int unifromLocation = glGetAttribLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(ID_, name);
     glUniform1i(unifromLocation, value);
 };
