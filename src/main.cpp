@@ -1,26 +1,22 @@
 #include "shader.hpp"
 #include "platform/window_context.hpp"
 #include "platform/window.hpp"
+#include "vertex_buffer.hpp"
 #include <filesystem>
 
 int main() {
     WindowContext windowContext;
     Window window{1920, 1080, "model-viewer", nullptr, nullptr, windowContext};
 
-    const float vertices[]{
+    const std::vector<float> vertices{
         -0.5f, -0.5f, 0,  //
         0.5f,  -0.5f, 0,  //
         0.0f,  0.5f,  0,
-
     };
 
-    unsigned int VAO, VBO;
+    unsigned int VAO;
     glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    VertexBuffer vertexBuffer{&vertices};
 
     Shader shader{"shaders/default.vert", "shaders/default.frag"};
 
@@ -29,7 +25,7 @@ int main() {
 
         shader.use();
 
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        vertexBuffer.bind();
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 

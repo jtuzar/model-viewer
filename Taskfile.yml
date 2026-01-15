@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  run:debug:
+    deps: [build:debug]
+    cmd: ./build/debug/model-viewer
+
+  run:release:
+    deps: [build:release]
+    cmd: ./build/release/model-viewer
+
+  build:debug:
+    deps: [config_cmake]
+    cmd: cmake --build --preset debug
+
+  build:release:
+    deps: [config_cmake]
+    cmd: cmake --build --preset release
+
+  config_cmake:
+    sources:
+      - ./**/CMakeLists.txt
+      - exclude: ./build/**/*
+    cmds:
+      - cmake --preset debug
+      - cmake --preset release

@@ -4,7 +4,8 @@
 
 #if MV_DEBUG
 #include <iostream>
-#endif  // !DEBUG
+void enableGlDebug();
+#endif
 
 Window::Window(unsigned int width,
                unsigned int height,
@@ -30,7 +31,9 @@ Window::Window(unsigned int width,
 #if MV_DEBUG
     std::cout << "Loaded OpenGL " << GLAD_VERSION_MAJOR(version) << "."
               << GLAD_VERSION_MINOR(version) << std::endl;
-#endif  // DEBUG
+
+    enableGlDebug();
+#endif
 }
 
 Window::~Window() {
@@ -44,3 +47,29 @@ void Window::swapBuffers() const {
 bool Window::shouldClose() const {
     return glfwWindowShouldClose(glfwWindow_);
 }
+
+#if MV_DEBUG
+static void APIENTRY glDebugCallback(GLenum source,
+                                     GLenum type,
+                                     GLuint id,
+                                     GLenum severity,
+                                     GLsizei length,
+                                     const GLchar* message,
+                                     const void* userParam) {
+    std::fprintf(stderr, "GL DEBUG: %s\n", message);
+}
+
+void enableGlDebug() {
+    glEnable(GL_DEBUG_OUTPUT);
+    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    glDebugMessageCallback(glDebugCallback, nullptr);
+
+    int flags = 0;
+    glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+    if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
+        std::printf("Debug context: YES\n");
+    } else {
+        std::printf("Debug context: NO\n");
+    }
+}
+#endif
