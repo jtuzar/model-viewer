@@ -2,7 +2,7 @@
 #include "window.hpp"
 #include <stdexcept>
 
-#ifdef DEBUG
+#if MV_DEBUG
 #include <iostream>
 #endif  // !DEBUG
 
@@ -27,11 +27,9 @@ Window::Window(unsigned int width,
         glfwWindow_ = nullptr;
         throw std::runtime_error("Failed to initialize OpenGL context");
     }
-#ifdef DEBUG
+#if MV_DEBUG
     std::cout << "Loaded OpenGL " << GLAD_VERSION_MAJOR(version) << "."
               << GLAD_VERSION_MINOR(version) << std::endl;
-
-    isInitialized_ = true;
 #endif  // DEBUG
 }
 

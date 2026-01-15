@@ -27,7 +27,7 @@ Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentP
         vertexCode = vShaderStream.str();
         fragmentCode = fShaderStream.str();
     } catch (std::ifstream::failure& e) {
-#ifdef DEBUG
+#if MV_DEBUG
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
 #endif  // DEBUG
     }
@@ -38,14 +38,14 @@ Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentP
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode, nullptr);
     glCompileShader(vertex);
-#ifdef DEBUG
+#if MV_DEBUG
     checkCompileErrors(vertex, "VERTEX");
 #endif  // DEBUG
 
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fShaderCode, nullptr);
     glCompileShader(fragment);
-#ifdef DEBUG
+#if MV_DEBUG
     checkCompileErrors(fragment, "FRAGMENT");
 #endif  // DEBUG
 
@@ -53,7 +53,7 @@ Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentP
     glAttachShader(ID_, vertex);
     glAttachShader(ID_, fragment);
     glLinkProgram(ID_);
-#ifdef DEBUG
+#if MV_DEBUG
     checkCompileErrors(ID_, "PROGRAM");
 #endif  // DEBUG
     glDeleteShader(vertex);

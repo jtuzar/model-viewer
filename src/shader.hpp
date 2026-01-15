@@ -3,7 +3,7 @@
 #include <glad/gl.h>
 #include <filesystem>
 
-#ifdef DEBUG
+#if MV_DEBUG
 #include <iostream>
 #endif  // DEBUG
 
@@ -17,7 +17,7 @@ class Shader {
     void setInt(const char* name, int value);
 
    private:
-#ifdef DEBUG
+#if MV_DEBUG
     void checkCompileErrors(unsigned int shader, std::string type) {
         int success;
         char infoLog[GL_INFO_LOG_LENGTH];

@@ -1,4 +1,6 @@
-add_library(glad)
+add_library(glad STATIC)
+
+mv_enable_debug_macro(glad)
 
 target_sources(glad
   PRIVATE
