@@ -1,15 +1,17 @@
 #pragma once
 
-#include <vector>
+#include "rendering/vertex.hpp"
+#include <span>
+#include <glad/gl.h>
+
 class VertexBuffer {
    public:
-    explicit VertexBuffer(const std::vector<float>* data);
+    explicit VertexBuffer(std::span<const Vertex> data);
     ~VertexBuffer();
     VertexBuffer(const VertexBuffer&) = delete;
     VertexBuffer& operator=(const VertexBuffer&) = delete;
 
-    void bind();
-    void unbind();
+    GLuint getName() { return id_; };
 
    private:
     unsigned int id_;

@@ -1,21 +1,13 @@
-#include "vertex_buffer.hpp"
+#include "rendering/vertex.hpp"
+#include "rendering/vertex_buffer.hpp"
 #include <glad/gl.h>
-#include <vector>
+#include <span>
 
-VertexBuffer::VertexBuffer(const std::vector<float>* data) {
+VertexBuffer::VertexBuffer(std::span<const Vertex> vertices) {
     glCreateBuffers(1, &id_);
-    glNamedBufferData(id_, data->size() * sizeof(float), data->data(), GL_STATIC_DRAW);
+    glNamedBufferData(id_, vertices.size_bytes(), vertices.data(), GL_STATIC_DRAW);
 }
 
 VertexBuffer::~VertexBuffer() {
-    unbind();
     glDeleteBuffers(1, &id_);
-}
-
-void VertexBuffer::bind() {
-    glBindBuffer(GL_ARRAY_BUFFER, id_);
-}
-
-void VertexBuffer::unbind() {
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

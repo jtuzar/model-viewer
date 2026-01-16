@@ -22,6 +22,7 @@ tasks:
   config_cmake:
     sources:
       - ./**/CMakeLists.txt
+      - CMakePresets.json
       - exclude: ./build/**/*
     cmds:
       - cmake --preset debug

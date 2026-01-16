@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
 project(model-viewer)
 
@@ -12,6 +12,7 @@ endfunction()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(third_party)
+add_subdirectory(src/math)
 add_subdirectory(src/platform)
 add_subdirectory(src/rendering)
 
