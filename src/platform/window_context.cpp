@@ -11,6 +11,8 @@ WindowContext::WindowContext() {
     if (!glfwInit())
         throw std::runtime_error("Failed to initialize GLFW");
 
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+
     isInitialized_ = true;
 }
 

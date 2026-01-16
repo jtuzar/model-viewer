@@ -9,7 +9,6 @@
 
 class Shader {
    public:
-    unsigned int ID_;
     Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath);
     void use();
     void setBool(const char* name, bool value);
@@ -17,6 +16,8 @@ class Shader {
     void setInt(const char* name, int value);
 
    private:
+    unsigned int id_;
+
 #if MV_DEBUG
     void checkCompileErrors(unsigned int shader, std::string type) {
         int success;

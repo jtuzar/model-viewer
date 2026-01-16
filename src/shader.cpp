@@ -49,30 +49,30 @@ Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentP
     checkCompileErrors(fragment, "FRAGMENT");
 #endif  // DEBUG
 
-    ID_ = glCreateProgram();
-    glAttachShader(ID_, vertex);
-    glAttachShader(ID_, fragment);
-    glLinkProgram(ID_);
+    id_ = glCreateProgram();
+    glAttachShader(id_, vertex);
+    glAttachShader(id_, fragment);
+    glLinkProgram(id_);
 #if MV_DEBUG
-    checkCompileErrors(ID_, "PROGRAM");
+    checkCompileErrors(id_, "PROGRAM");
 #endif  // DEBUG
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 };
 
 void Shader::use() {
-    glUseProgram(ID_);
+    glUseProgram(id_);
 }
 
 void Shader::setBool(const char* name, bool value) {
-    const int unifromLocation = glGetUniformLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };
 void Shader::setFloat(const char* name, float value) {
-    const int unifromLocation = glGetUniformLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1f(unifromLocation, value);
 };
 void Shader::setInt(const char* name, int value) {
-    const int unifromLocation = glGetUniformLocation(ID_, name);
+    const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };

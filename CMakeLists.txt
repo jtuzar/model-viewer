@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
 project(model-viewer)
 
@@ -12,17 +12,18 @@ endfunction()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(third_party)
+add_subdirectory(src/math)
 add_subdirectory(src/platform)
+add_subdirectory(src/rendering)
 
 add_executable(model-viewer
   src/main.cpp
   src/shader.cpp
 )
 target_include_directories(model-viewer PRIVATE src)
-target_link_libraries(model-viewer PRIVATE platform)
+target_link_libraries(model-viewer PRIVATE platform rendering)
 
 mv_enable_debug_macro(model-viewer)
-
 
 set(SHADERS_SRC_DIR "${CMAKE_SOURCE_DIR}/shaders")
 set(SHADERS_DST_DIR "$<TARGET_FILE_DIR:model-viewer>/shaders")
