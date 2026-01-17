@@ -16,6 +16,6 @@ target_sources(platform
       "${CMAKE_CURRENT_SOURCE_DIR}/window_context.hpp"
 )
 
-target_link_libraries(platform glfw glad)
+target_link_libraries(platform PRIVATE glfw)
 
 

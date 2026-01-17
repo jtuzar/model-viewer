@@ -1,7 +1,12 @@
 #pragma once
 
-#include "window_context.hpp"
-#include <GLFW/glfw3.h>
+#include "platform/window_context.hpp"
+
+struct GLFWwindow;
+struct GLFWmonitor;
+
+using GLProc = void (*)();
+using GLProcLoader = GLProc (*)(const char* name);
 
 class Window {
    public:
@@ -18,6 +23,8 @@ class Window {
 
     void swapBuffers() const;
     bool shouldClose() const;
+    void makeContextCurrent() const;
+    GLProcLoader getGLProcLoader() const;
 
    private:
     GLFWwindow* glfwWindow_;

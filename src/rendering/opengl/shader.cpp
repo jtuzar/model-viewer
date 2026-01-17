@@ -1,8 +1,8 @@
+#include "rendering/opengl/shader.hpp"
 #include <glad/gl.h>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <shader.hpp>
 
 Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath) {
     std::string vertexCode;

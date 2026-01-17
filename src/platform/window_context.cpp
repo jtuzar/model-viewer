@@ -1,5 +1,4 @@
-#include <glad/gl.h>
-#include "window_context.hpp"
+#include "platform/window_context.hpp"
 #include <GLFW/glfw3.h>
 #include <cassert>
 #include <stdexcept>

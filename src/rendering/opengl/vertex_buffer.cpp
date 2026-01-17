@@ -1,5 +1,5 @@
-#include "rendering/vertex.hpp"
-#include "rendering/vertex_buffer.hpp"
+#include "assets/vertex.hpp"
+#include "rendering/opengl/vertex_buffer.hpp"
 #include <glad/gl.h>
 #include <span>
 

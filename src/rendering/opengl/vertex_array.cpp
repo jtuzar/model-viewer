@@ -1,5 +1,5 @@
-#include "rendering/vertex_array.hpp"
-#include "rendering/vertex.hpp"
+#include "assets/vertex.hpp"
+#include "rendering/opengl/vertex_array.hpp"
 #include <glad/gl.h>
 #include <cstddef>
 

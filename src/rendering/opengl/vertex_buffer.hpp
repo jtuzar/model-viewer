@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rendering/vertex.hpp"
+#include "assets/vertex.hpp"
 #include <span>
 #include <glad/gl.h>
 

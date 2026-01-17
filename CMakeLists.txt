@@ -13,15 +13,16 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(third_party)
 add_subdirectory(src/math)
-add_subdirectory(src/platform)
+add_subdirectory(src/assets)
 add_subdirectory(src/rendering)
+add_subdirectory(src/platform)
 
 add_executable(model-viewer
   src/main.cpp
-  src/shader.cpp
 )
+
 target_include_directories(model-viewer PRIVATE src)
-target_link_libraries(model-viewer PRIVATE platform rendering)
+target_link_libraries(model-viewer PRIVATE platform rendering glad)
 
 mv_enable_debug_macro(model-viewer)
 
