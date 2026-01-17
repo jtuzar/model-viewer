@@ -1,12 +1,12 @@
 #include "assets/vertex.hpp"
-#include "rendering/opengl/vertex_array.hpp"
+#include "rendering/vertex_array.hpp"
 #include <glad/gl.h>
 #include <cstddef>
 
-VertexArray::VertexArray(GLuint bufferId) {
+VertexArray::VertexArray(unsigned int bufferId) {
     glCreateVertexArrays(1, &id_);
 
-    constexpr GLuint bindingIndex = 0;
+    constexpr unsigned int bindingIndex = 0;
     glVertexArrayVertexBuffer(id_, bindingIndex, bufferId, 0, sizeof(Vertex));
 
     glEnableVertexArrayAttrib(id_, 0);

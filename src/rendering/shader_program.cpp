@@ -1,10 +1,14 @@
-#include "rendering/opengl/shader.hpp"
+#include "rendering/shader_program.hpp"
 #include <glad/gl.h>
-#include <filesystem>
 #include <fstream>
 #include <iostream>
 
-Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath) {
+#if MV_DEBUG
+#include <iostream>
+void checkCompileErrors(unsigned int shader, std::string type);
+#endif  // DEBUG
+
+ShaderProgram::ShaderProgram(std::filesystem::path vertexPath, std::filesystem::path fragmentPath) {
     std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;
@@ -60,19 +64,49 @@ Shader::Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentP
     glDeleteShader(fragment);
 };
 
-void Shader::use() {
+void ShaderProgram::use() {
     glUseProgram(id_);
 }
 
-void Shader::setBool(const char* name, bool value) {
+void ShaderProgram::setBool(const char* name, bool value) {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };
-void Shader::setFloat(const char* name, float value) {
+void ShaderProgram::setFloat(const char* name, float value) {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1f(unifromLocation, value);
 };
-void Shader::setInt(const char* name, int value) {
+void ShaderProgram::setInt(const char* name, int value) {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };
+
+#if MV_DEBUG
+void checkCompileErrors(unsigned int shader, std::string type) {
+    int success;
+    char infoLog[GL_INFO_LOG_LENGTH];
+    if (type != "PROGRAM") {
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(shader, GL_INFO_LOG_LENGTH, nullptr, infoLog);
+            std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n"
+                      << infoLog
+                      << "\n -- "
+                         "--------------------------------------------------- "
+                         "-- "
+                      << std::endl;
+        }
+    } else {
+        glGetProgramiv(shader, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(shader, GL_INFO_LOG_LENGTH, nullptr, infoLog);
+            std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
+                      << infoLog
+                      << "\n -- "
+                         "--------------------------------------------------- "
+                         "-- "
+                      << std::endl;
+        }
+    }
+};
+#endif  // DEBUG

@@ -3,7 +3,6 @@
 #include "assets/vertex.hpp"
 #include <vector>
 
-class Mesh {
-   public:
+struct Mesh {
     std::vector<Vertex> vertices;
 };

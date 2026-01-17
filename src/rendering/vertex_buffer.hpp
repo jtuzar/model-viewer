@@ -2,7 +2,6 @@
 
 #include "assets/vertex.hpp"
 #include <span>
-#include <glad/gl.h>
 
 class VertexBuffer {
    public:
@@ -11,7 +10,7 @@ class VertexBuffer {
     VertexBuffer(const VertexBuffer&) = delete;
     VertexBuffer& operator=(const VertexBuffer&) = delete;
 
-    GLuint getName() { return id_; };
+    unsigned int getName() { return id_; };
 
    private:
     unsigned int id_;

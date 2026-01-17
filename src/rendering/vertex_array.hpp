@@ -1,10 +1,8 @@
 #pragma once
 
-#include <glad/gl.h>
-
 class VertexArray {
    public:
-    explicit VertexArray(GLuint bufferId);
+    explicit VertexArray(unsigned int bufferId);
     ~VertexArray();
     VertexArray(const VertexArray&) = delete;
     VertexArray& operator=(const VertexArray&) = delete;

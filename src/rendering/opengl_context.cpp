@@ -1,5 +1,5 @@
 #include "platform/window.hpp"
-#include "rendering/opengl/renderer_opengl.hpp"
+#include "rendering/opengl_context.hpp"
 #include <iostream>
 #include <glad/gl.h>
 #include <stdexcept>
@@ -9,7 +9,7 @@
 void enableGlDebug();
 #endif
 
-RendererOpenGL::RendererOpenGL(Window& window) {
+OpenGlContext::OpenGlContext(Window& window) {
     window.makeContextCurrent();
     int version = gladLoadGL(window.getGLProcLoader());
     if (version == 0) {
@@ -24,12 +24,12 @@ RendererOpenGL::RendererOpenGL(Window& window) {
 }
 
 #if MV_DEBUG
-void glDebugCallback(GLenum source,
-                     GLenum type,
-                     GLuint id,
-                     GLenum severity,
-                     GLsizei length,
-                     const GLchar* message,
+void glDebugCallback(unsigned int source,
+                     unsigned int type,
+                     unsigned int id,
+                     unsigned int severity,
+                     int length,
+                     const char* message,
                      const void* userParam) {
     std::fprintf(stderr, "GL DEBUG: %s\n", message);
 }

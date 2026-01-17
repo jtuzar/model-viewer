@@ -22,7 +22,7 @@ add_executable(model-viewer
 )
 
 target_include_directories(model-viewer PRIVATE src)
-target_link_libraries(model-viewer PRIVATE platform rendering glad)
+target_link_libraries(model-viewer PRIVATE platform rendering)
 
 mv_enable_debug_macro(model-viewer)
 
