@@ -13,8 +13,6 @@ class Window {
     Window(unsigned int width,
            unsigned int height,
            const char* title,
-           GLFWmonitor* monitor,
-           GLFWwindow* share,
            WindowContext& windowContext);
 
     ~Window();

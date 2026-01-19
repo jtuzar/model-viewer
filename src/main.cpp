@@ -5,7 +5,7 @@
 
 int main() {
     WindowContext windowContext;
-    Window window{1920, 1080, "model-viewer", nullptr, nullptr, windowContext};
+    Window window{1920, 1080, "model-viewer", windowContext};
     OpenGlContext glContext{window};
 
     Model model{glContext};

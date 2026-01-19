@@ -5,10 +5,8 @@
 Window::Window(unsigned int width,
                unsigned int height,
                const char* title,
-               GLFWmonitor* monitor,
-               GLFWwindow* share,
                WindowContext& windowContext) {
-    glfwWindow_ = glfwCreateWindow(width, height, title, monitor, share);
+    glfwWindow_ = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
     if (!glfwWindow_) {
         glfwTerminate();
