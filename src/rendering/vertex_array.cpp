@@ -1,7 +1,9 @@
-#include "assets/vertex.hpp"
 #include "rendering/vertex_array.hpp"
-#include <glad/gl.h>
+
+#include "assets/vertex.hpp"
+
 #include <cstddef>
+#include <glad/gl.h>
 
 VertexArray::VertexArray(unsigned int bufferId) {
     glCreateVertexArrays(1, &id_);
@@ -19,10 +21,6 @@ VertexArray::VertexArray(unsigned int bufferId) {
     glVertexArrayAttribBinding(id_, 1, bindingIndex);
 }
 
-VertexArray::~VertexArray() {
-    glDeleteVertexArrays(1, &id_);
-}
+VertexArray::~VertexArray() { glDeleteVertexArrays(1, &id_); }
 
-void VertexArray::bind() {
-    glBindVertexArray(id_);
-}
+void VertexArray::bind() { glBindVertexArray(id_); }

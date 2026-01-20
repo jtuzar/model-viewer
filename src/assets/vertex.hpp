@@ -6,6 +6,6 @@
 struct Vertex {
     using UV = Vec2;
     using Position = Vec3;
-    Position position;
-    UV uv;
+    Position position{};
+    UV uv{};
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 class WindowContext {
-   public:
+  public:
     WindowContext();
     ~WindowContext();
 
@@ -12,6 +12,6 @@ class WindowContext {
 
     void pollEvents() const;
 
-   private:
-    inline static bool isInitialized_ = false;
+  private:
+    inline static bool isInitialized_{false};
 };

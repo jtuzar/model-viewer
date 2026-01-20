@@ -1,7 +1,7 @@
 #pragma once
 
 class VertexArray {
-   public:
+  public:
     explicit VertexArray(unsigned int bufferId);
     ~VertexArray();
     VertexArray(const VertexArray&) = delete;
@@ -9,7 +9,6 @@ class VertexArray {
 
     void bind();
 
-   private:
-    unsigned int id_;
-    unsigned int enabled_attrib_count_{0};
+  private:
+    unsigned int id_{};
 };

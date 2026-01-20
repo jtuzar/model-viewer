@@ -1,10 +1,11 @@
 #pragma once
 
 #include "assets/vertex.hpp"
+
 #include <span>
 
 class VertexBuffer {
-   public:
+  public:
     explicit VertexBuffer(std::span<const Vertex> data);
     ~VertexBuffer();
     VertexBuffer(const VertexBuffer&) = delete;
@@ -12,6 +13,6 @@ class VertexBuffer {
 
     unsigned int getName() { return id_; };
 
-   private:
-    unsigned int id_;
+  private:
+    unsigned int id_{};
 };

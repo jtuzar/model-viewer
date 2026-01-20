@@ -1,6 +1,7 @@
 #pragma once
 
 #include "assets/vertex.hpp"
+
 #include <vector>
 
 struct Mesh {

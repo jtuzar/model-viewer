@@ -3,7 +3,8 @@
 #include <type_traits>
 
 struct Vec2 {
-    float x, y;
+    float x{};
+    float y{};
 
     static constexpr unsigned int componentCount = 2;
 };

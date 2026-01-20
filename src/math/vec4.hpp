@@ -3,7 +3,10 @@
 #include <type_traits>
 
 struct Vec4 {
-    float x, y, z, w;
+    float x{};
+    float y{};
+    float z{};
+    float w{};
 
     static constexpr unsigned int componentCount = 4;
 };

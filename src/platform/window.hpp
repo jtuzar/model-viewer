@@ -9,10 +9,8 @@ using GLProc = void (*)();
 using GLProcLoader = GLProc (*)(const char* name);
 
 class Window {
-   public:
-    Window(unsigned int width,
-           unsigned int height,
-           const char* title,
+  public:
+    Window(unsigned int width, unsigned int height, const char* title,
            WindowContext& windowContext);
 
     ~Window();
@@ -24,6 +22,6 @@ class Window {
     void makeContextCurrent() const;
     GLProcLoader getGLProcLoader() const;
 
-   private:
-    GLFWwindow* glfwWindow_;
+  private:
+    GLFWwindow* glfwWindow_{nullptr};
 };

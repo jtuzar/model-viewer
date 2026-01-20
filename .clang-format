@@ -1,11 +1,24 @@
-BasedOnStyle: Chromium
+BasedOnStyle: LLVM
+Standard: Latest
+
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
+
 ColumnLimit: 100
 
-SortIncludes: false
-BreakBeforeBraces: Attach
-AllowShortFunctionsOnASingleLine: Inline
+ReflowComments: Never
+
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
+IncludeBlocks: Regroup
+
 DerivePointerAlignment: false
 PointerAlignment: Left
+
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+InsertBraces: true
+InsertNewlineAtEOF: true

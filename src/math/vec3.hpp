@@ -3,7 +3,9 @@
 #include <type_traits>
 
 struct Vec3 {
-    float x, y, z;
+    float x{};
+    float y{};
+    float z{};
 
     static constexpr unsigned int componentCount = 3;
 };
