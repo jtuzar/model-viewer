@@ -9,5 +9,22 @@ VertexBuffer::VertexBuffer(std::span<const Vertex> vertices) {
 }
 
 VertexBuffer::~VertexBuffer() {
-    glDeleteBuffers(1, &id_);
+    if (id_ > 0)
+        glDeleteBuffers(1, &id_);
+}
+
+VertexBuffer::VertexBuffer(VertexBuffer&& other) : id_{other.id_} {
+    other.id_ = 0;
+}
+
+VertexBuffer& VertexBuffer::operator=(VertexBuffer&& other) noexcept {
+    if (&other == this)
+        return *this;
+
+    if (id_ > 0)
+        glDeleteBuffers(1, &id_);
+
+    id_ = other.id_;
+    other.id_ = 0;
+    return *this;
 }

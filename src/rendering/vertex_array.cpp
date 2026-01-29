@@ -19,8 +19,25 @@ VertexArray::VertexArray(unsigned int bufferId) {
     glVertexArrayAttribBinding(id_, 1, bindingIndex);
 }
 
+VertexArray::VertexArray(VertexArray&& other) : id_{other.id_} {
+    other.id_ = 0;
+}
+VertexArray& VertexArray::operator=(VertexArray&& other) {
+    if (&other == this)
+        return *this;
+
+    if (id_ > 0)
+        glDeleteVertexArrays(1, &id_);
+
+    id_ = other.id_;
+    other.id_ = 0;
+
+    return *this;
+}
+
 VertexArray::~VertexArray() {
-    glDeleteVertexArrays(1, &id_);
+    if (id_ > 0)
+        glDeleteVertexArrays(1, &id_);
 }
 
 void VertexArray::bind() {

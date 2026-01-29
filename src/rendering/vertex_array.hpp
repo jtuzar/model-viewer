@@ -3,9 +3,14 @@
 class VertexArray {
    public:
     explicit VertexArray(unsigned int bufferId);
-    ~VertexArray();
+
     VertexArray(const VertexArray&) = delete;
     VertexArray& operator=(const VertexArray&) = delete;
+
+    VertexArray(VertexArray&&);
+    VertexArray& operator=(VertexArray&&);
+
+    ~VertexArray();
 
     void bind();
 
