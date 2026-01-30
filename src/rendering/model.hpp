@@ -1,17 +1,19 @@
 #pragma once
 #include "assets/mesh.hpp"
+#include "rendering/internal/gl_buffer.hpp"
 #include "rendering/opengl_context.hpp"
 #include "rendering/shader_program.hpp"
 #include "rendering/vertex_array.hpp"
-#include "rendering/vertex_buffer.hpp"
 class Model {
    public:
-    explicit Model(OpenGlContext& openGlContext);
+    Model(const Mesh&, const ShaderProgram&, OpenGlContext&);
     void draw();
 
    private:
-    Mesh mesh_;
-    ShaderProgram shaderProgram_;
-    VertexBuffer vertexBuffer_;
+    unsigned long verticesCount_;
+    unsigned long indicesCount_;
+    const ShaderProgram& shaderProgram_;
+    rendering::GLBuffer vertexBuffer_;
+    rendering::GLBuffer elementBuffer_;
     VertexArray vertexArray_;
 };

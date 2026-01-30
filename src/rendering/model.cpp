@@ -1,22 +1,22 @@
-#include "assets/vertex.hpp"
+#include "assets/mesh.hpp"
 #include "rendering/model.hpp"
+#include "rendering/internal/gl_buffer.hpp"
 #include "rendering/opengl_context.hpp"
 #include "rendering/shader_program.hpp"
-#include "rendering/vertex_buffer.hpp"
-#include "rendering/vertex_array.hpp"
 #include <glad/gl.h>
 
-Model::Model(OpenGlContext& openGlContext)
-    : shaderProgram_{"shaders/default.vert", "shaders/default.frag"},
-      mesh_{{Vertex{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}}, Vertex{{0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},
-             Vertex{{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f}}}},
-      vertexBuffer_{mesh_.vertices},
-      vertexArray_{vertexBuffer_.getName()} {}
+Model::Model(const Mesh& mesh, const ShaderProgram& shaderProgram, OpenGlContext&)
+    : shaderProgram_{shaderProgram},
+      vertexBuffer_{rendering::createVbo(mesh.vertices, GL_STATIC_DRAW)},
+      elementBuffer_{rendering::createEbo(mesh.indices, GL_STATIC_DRAW)},
+      vertexArray_{vertexBuffer_.getName(), elementBuffer_.getName()},
+      verticesCount_{mesh.vertices.size()},
+      indicesCount_{mesh.indices.size()} {};
 
 void Model::draw() {
     glClear(GL_COLOR_BUFFER_BIT);
     shaderProgram_.use();
 
     vertexArray_.bind();
-    glDrawArrays(GL_TRIANGLES, 0, mesh_.vertices.size());
+    glDrawElements(GL_TRIANGLES, indicesCount_, GL_UNSIGNED_INT, nullptr);
 }

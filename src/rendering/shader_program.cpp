@@ -64,19 +64,19 @@ ShaderProgram::ShaderProgram(std::filesystem::path vertexPath, std::filesystem::
     glDeleteShader(fragment);
 };
 
-void ShaderProgram::use() {
+void ShaderProgram::use() const {
     glUseProgram(id_);
 }
 
-void ShaderProgram::setBool(const char* name, bool value) {
+void ShaderProgram::setBool(const char* name, bool value) const {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };
-void ShaderProgram::setFloat(const char* name, float value) {
+void ShaderProgram::setFloat(const char* name, float value) const {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1f(unifromLocation, value);
 };
-void ShaderProgram::setInt(const char* name, int value) {
+void ShaderProgram::setInt(const char* name, int value) const {
     const int unifromLocation = glGetUniformLocation(id_, name);
     glUniform1i(unifromLocation, value);
 };

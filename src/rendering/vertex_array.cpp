@@ -3,11 +3,11 @@
 #include <glad/gl.h>
 #include <cstddef>
 
-VertexArray::VertexArray(unsigned int bufferId) {
+VertexArray::VertexArray(unsigned int vbo, unsigned int ebo) {
     glCreateVertexArrays(1, &id_);
 
     constexpr unsigned int bindingIndex = 0;
-    glVertexArrayVertexBuffer(id_, bindingIndex, bufferId, 0, sizeof(Vertex));
+    glVertexArrayVertexBuffer(id_, bindingIndex, vbo, 0, sizeof(Vertex));
 
     glEnableVertexArrayAttrib(id_, 0);
     glVertexArrayAttribFormat(id_, 0, Vertex::Position::componentCount, GL_FLOAT, GL_FALSE, 0);
@@ -17,6 +17,8 @@ VertexArray::VertexArray(unsigned int bufferId) {
     glVertexArrayAttribFormat(id_, 1, Vertex::UV::componentCount, GL_FLOAT, GL_FALSE,
                               offsetof(Vertex, uv));
     glVertexArrayAttribBinding(id_, 1, bindingIndex);
+
+    glVertexArrayElementBuffer(id_, ebo);
 }
 
 VertexArray::VertexArray(VertexArray&& other) : id_{other.id_} {

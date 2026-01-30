@@ -2,7 +2,7 @@
 
 class VertexArray {
    public:
-    explicit VertexArray(unsigned int bufferId);
+    explicit VertexArray(unsigned int vbo, unsigned int ebo);
 
     VertexArray(const VertexArray&) = delete;
     VertexArray& operator=(const VertexArray&) = delete;
@@ -15,6 +15,5 @@ class VertexArray {
     void bind();
 
    private:
-    unsigned int id_;
-    unsigned int enabled_attrib_count_{0};
+    unsigned int id_{};
 };
