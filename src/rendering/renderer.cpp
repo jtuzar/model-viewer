@@ -10,12 +10,10 @@ void Renderer::draw() const {
     glClear(GL_COLOR_BUFFER_BIT);
 
     for (auto& model : models_) {
-        model.makeActive();
+        model.bindForDraw();
 
-        unsigned int indicesCount = model.getIndicesCount();
-
-        if (indicesCount) {
-            glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, nullptr);
+        if (model.isIndexed()) {
+            glDrawElements(GL_TRIANGLES, model.getIndicesCount(), GL_UNSIGNED_INT, nullptr);
         } else {
             glDrawArrays(GL_TRIANGLES, 0, model.getVerticesCount());
         }

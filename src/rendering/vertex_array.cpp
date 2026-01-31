@@ -1,24 +1,9 @@
 #include "assets/vertex.hpp"
 #include "rendering/vertex_array.hpp"
 #include <glad/gl.h>
-#include <cstddef>
 
-VertexArray::VertexArray(unsigned int vbo, unsigned int ebo) {
+VertexArray::VertexArray() {
     glCreateVertexArrays(1, &id_);
-
-    constexpr unsigned int bindingIndex = 0;
-    glVertexArrayVertexBuffer(id_, bindingIndex, vbo, 0, sizeof(Vertex));
-
-    glEnableVertexArrayAttrib(id_, 0);
-    glVertexArrayAttribFormat(id_, 0, Vertex::Position::componentCount, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayAttribBinding(id_, 0, bindingIndex);
-
-    glEnableVertexArrayAttrib(id_, 1);
-    glVertexArrayAttribFormat(id_, 1, Vertex::UV::componentCount, GL_FLOAT, GL_FALSE,
-                              offsetof(Vertex, uv));
-    glVertexArrayAttribBinding(id_, 1, bindingIndex);
-
-    glVertexArrayElementBuffer(id_, ebo);
 }
 
 VertexArray::VertexArray(VertexArray&& other) : id_{other.id_} {
@@ -44,4 +29,19 @@ VertexArray::~VertexArray() {
 
 void VertexArray::bind() const {
     glBindVertexArray(id_);
+}
+
+void VertexArray::bindVbo(unsigned int vbo) const {
+    glVertexArrayVertexBuffer(id_, 0, vbo, 0, sizeof(Vertex));
+}
+
+void VertexArray::bindEbo(unsigned int ebo) const {
+    glVertexArrayElementBuffer(id_, ebo);
+}
+
+void VertexArray::setAttribute(int size, int type, bool normalized, int offset) {
+    glEnableVertexArrayAttrib(id_, activatedAttribCount_);
+    glVertexArrayAttribFormat(id_, activatedAttribCount_, size, type, normalized, offset);
+    glVertexArrayAttribBinding(id_, activatedAttribCount_, 0);
+    activatedAttribCount_++;
 }

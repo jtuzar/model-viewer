@@ -4,10 +4,57 @@
 #include "platform/window.hpp"
 #include "rendering/shader_program.hpp"
 
-static const Mesh testMesh =
-    Mesh{.vertices{Vertex{.position{0.5f, 0.5f, 0.0f}}, Vertex{.position{0.5f, -0.5f, 0.0f}},
-                   Vertex{.position{-0.5f, -0.5f, 0.0f}}, Vertex{.position{-0.5f, 0.5f, 0.0f}}},
-         .indices{0, 1, 3, 1, 2, 3}};
+static const Mesh testMesh = Mesh{
+    .vertices{
+        // +Z (front)
+        {{-0.5f, -0.5f, 0.5f}, {0, 0, 1}, {0, 0}},
+        {{0.5f, -0.5f, 0.5f}, {0, 0, 1}, {1, 0}},
+        {{0.5f, 0.5f, 0.5f}, {0, 0, 1}, {1, 1}},
+        {{0.5f, 0.5f, 0.5f}, {0, 0, 1}, {1, 1}},
+        {{-0.5f, 0.5f, 0.5f}, {0, 0, 1}, {0, 1}},
+        {{-0.5f, -0.5f, 0.5f}, {0, 0, 1}, {0, 0}},
+
+        // -Z (back)
+        {{0.5f, -0.5f, -0.5f}, {0, 0, -1}, {0, 0}},
+        {{-0.5f, -0.5f, -0.5f}, {0, 0, -1}, {1, 0}},
+        {{-0.5f, 0.5f, -0.5f}, {0, 0, -1}, {1, 1}},
+        {{-0.5f, 0.5f, -0.5f}, {0, 0, -1}, {1, 1}},
+        {{0.5f, 0.5f, -0.5f}, {0, 0, -1}, {0, 1}},
+        {{0.5f, -0.5f, -0.5f}, {0, 0, -1}, {0, 0}},
+
+        // -X (left)
+        {{-0.5f, -0.5f, -0.5f}, {-1, 0, 0}, {0, 0}},
+        {{-0.5f, -0.5f, 0.5f}, {-1, 0, 0}, {1, 0}},
+        {{-0.5f, 0.5f, 0.5f}, {-1, 0, 0}, {1, 1}},
+        {{-0.5f, 0.5f, 0.5f}, {-1, 0, 0}, {1, 1}},
+        {{-0.5f, 0.5f, -0.5f}, {-1, 0, 0}, {0, 1}},
+        {{-0.5f, -0.5f, -0.5f}, {-1, 0, 0}, {0, 0}},
+
+        // +X (right)
+        {{0.5f, -0.5f, 0.5f}, {1, 0, 0}, {0, 0}},
+        {{0.5f, -0.5f, -0.5f}, {1, 0, 0}, {1, 0}},
+        {{0.5f, 0.5f, -0.5f}, {1, 0, 0}, {1, 1}},
+        {{0.5f, 0.5f, -0.5f}, {1, 0, 0}, {1, 1}},
+        {{0.5f, 0.5f, 0.5f}, {1, 0, 0}, {0, 1}},
+        {{0.5f, -0.5f, 0.5f}, {1, 0, 0}, {0, 0}},
+
+        // -Y (bottom)
+        {{-0.5f, -0.5f, -0.5f}, {0, -1, 0}, {0, 0}},
+        {{0.5f, -0.5f, -0.5f}, {0, -1, 0}, {1, 0}},
+        {{0.5f, -0.5f, 0.5f}, {0, -1, 0}, {1, 1}},
+        {{0.5f, -0.5f, 0.5f}, {0, -1, 0}, {1, 1}},
+        {{-0.5f, -0.5f, 0.5f}, {0, -1, 0}, {0, 1}},
+        {{-0.5f, -0.5f, -0.5f}, {0, -1, 0}, {0, 0}},
+
+        // +Y (top)
+        {{-0.5f, 0.5f, 0.5f}, {0, 1, 0}, {0, 0}},
+        {{0.5f, 0.5f, 0.5f}, {0, 1, 0}, {1, 0}},
+        {{0.5f, 0.5f, -0.5f}, {0, 1, 0}, {1, 1}},
+        {{0.5f, 0.5f, -0.5f}, {0, 1, 0}, {1, 1}},
+        {{-0.5f, 0.5f, -0.5f}, {0, 1, 0}, {0, 1}},
+        {{-0.5f, 0.5f, 0.5f}, {0, 1, 0}, {0, 0}},
+    },
+};
 
 int main() {
     WindowContext windowContext;
@@ -15,7 +62,8 @@ int main() {
     OpenGlContext glContext{window};
 
     Renderer renderer{glContext};
-    renderer.submit(testMesh, ShaderProgram{"shaders/default.vert", "shaders/default.frag"});
+    ShaderProgram shaderProgram{"shaders/default.vert", "shaders/default.frag"};
+    renderer.submit(testMesh, shaderProgram);
 
     while (!window.shouldClose()) {
         renderer.draw();
