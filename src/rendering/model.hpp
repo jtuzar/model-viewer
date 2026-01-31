@@ -7,7 +7,7 @@
 #include "rendering/vertex_array.hpp"
 class Model {
    public:
-    Model(const Mesh&, const ShaderProgram&);
+    Model(const Mesh& mesh, const ShaderProgram* const shaderProgram);
 
     void bindForDraw() const;
     std::size_t getIndicesCount() const { return indicesCount_; }
@@ -17,7 +17,7 @@ class Model {
    private:
     std::size_t verticesCount_{0};
     std::size_t indicesCount_{0};
-    const ShaderProgram& shaderProgram_;
+    const ShaderProgram* const shaderProgram_;
     rendering::GLBuffer vertexBuffer_;
     std::optional<rendering::GLBuffer> elementBuffer_;
     VertexArray vertexArray_;

@@ -8,7 +8,7 @@ class Renderer {
    public:
     explicit Renderer(const OpenGlContext&) {};
 
-    void submit(const Mesh&, const ShaderProgram&);
+    void submit(const Mesh& mesh, const ShaderProgram* const shaderProgram);
     void draw() const;
 
    private:

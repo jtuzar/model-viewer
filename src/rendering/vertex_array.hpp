@@ -15,9 +15,13 @@ class VertexArray {
     void bind() const;
     void bindVbo(unsigned int vbo) const;
     void bindEbo(unsigned int ebo) const;
-    void setAttribute(int size, int type, bool normalized, int offset);
+    void setAttribute(unsigned int location,
+                      int size,
+                      int type,
+                      bool normalized,
+                      int offset,
+                      unsigned int bindingIndex = 0);
 
    private:
     unsigned int id_{0};
-    unsigned int activatedAttribCount_{0};
 };

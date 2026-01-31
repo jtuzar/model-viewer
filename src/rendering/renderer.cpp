@@ -2,7 +2,7 @@
 #include "rendering/shader_program.hpp"
 #include <glad/gl.h>
 
-void Renderer::submit(const Mesh& mesh, const ShaderProgram& shaderProgram) {
+void Renderer::submit(const Mesh& mesh, const ShaderProgram* const shaderProgram) {
     models_.emplace_back(mesh, shaderProgram);
 }
 

@@ -63,7 +63,7 @@ int main() {
 
     Renderer renderer{glContext};
     ShaderProgram shaderProgram{"shaders/default.vert", "shaders/default.frag"};
-    renderer.submit(testMesh, shaderProgram);
+    renderer.submit(testMesh, &shaderProgram);
 
     while (!window.shouldClose()) {
         renderer.draw();

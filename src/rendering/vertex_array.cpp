@@ -39,9 +39,13 @@ void VertexArray::bindEbo(unsigned int ebo) const {
     glVertexArrayElementBuffer(id_, ebo);
 }
 
-void VertexArray::setAttribute(int size, int type, bool normalized, int offset) {
-    glEnableVertexArrayAttrib(id_, activatedAttribCount_);
-    glVertexArrayAttribFormat(id_, activatedAttribCount_, size, type, normalized, offset);
-    glVertexArrayAttribBinding(id_, activatedAttribCount_, 0);
-    activatedAttribCount_++;
+void VertexArray::setAttribute(unsigned int location,
+                               int size,
+                               int type,
+                               bool normalized,
+                               int offset,
+                               unsigned int bindingIndex) {
+    glEnableVertexArrayAttrib(id_, location);
+    glVertexArrayAttribFormat(id_, location, size, type, normalized, offset);
+    glVertexArrayAttribBinding(id_, location, bindingIndex);
 }
