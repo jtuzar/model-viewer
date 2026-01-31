@@ -1,4 +1,4 @@
-#include "rendering/model.hpp"
+#include "rendering/renderer.hpp"
 #include "rendering/opengl_context.hpp"
 #include "platform/window_context.hpp"
 #include "platform/window.hpp"
@@ -14,10 +14,11 @@ int main() {
     Window window{1920, 1080, "model-viewer", windowContext};
     OpenGlContext glContext{window};
 
-    Model model{testMesh, ShaderProgram{"shaders/default.vert", "shaders/default.frag"}, glContext};
+    Renderer renderer{glContext};
+    renderer.submit(testMesh, ShaderProgram{"shaders/default.vert", "shaders/default.frag"});
 
     while (!window.shouldClose()) {
-        model.draw();
+        renderer.draw();
 
         window.swapBuffers();
         windowContext.pollEvents();

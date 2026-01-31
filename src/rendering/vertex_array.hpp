@@ -12,7 +12,7 @@ class VertexArray {
 
     ~VertexArray();
 
-    void bind();
+    void bind() const;
 
    private:
     unsigned int id_{};
