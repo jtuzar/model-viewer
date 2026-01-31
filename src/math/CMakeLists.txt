@@ -16,3 +16,6 @@ target_sources(math
       "${CMAKE_CURRENT_SOURCE_DIR}/vec4.hpp"
 )
 
+if(MV_BUILD_TESTS)
+  add_subdirectory(tests)
+endif()

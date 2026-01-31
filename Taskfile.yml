@@ -15,9 +15,20 @@ tasks:
     deps: [config_cmake]
     cmd: cmake --build --preset debug
 
+  test:debug:
+    deps: [build:debug]
+    cmd: ctest --test-dir build/debug --output-on-failure
+
   build:release:
     deps: [config_cmake]
     cmd: cmake --build --preset release
+
+  test:release:
+    deps: [build:release]
+    cmd: ctest --test-dir build/release --output-on-failure
+
+  test:
+    deps: [test:debug]
 
   config_cmake:
     sources:

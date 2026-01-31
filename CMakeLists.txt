@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.23)
 
 project(model-viewer)
 
+option(MV_BUILD_TESTS "Build unit tests" ON)
+
+if(MV_BUILD_TESTS)
+  include(CTest)
+endif()
+
 function(mv_enable_debug_macro target)
   target_compile_definitions(${target}
         PRIVATE
