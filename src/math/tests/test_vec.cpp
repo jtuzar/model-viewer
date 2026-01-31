@@ -2,9 +2,9 @@
 
 #include <type_traits>
 
-#include "math/vec2.hpp"
-#include "math/vec3.hpp"
-#include "math/vec4.hpp"
+#include "math/vec.hpp"
+
+using namespace mv::math;
 
 TEST_CASE("VecN have expected componentCount") {
     STATIC_REQUIRE(Vec2::componentCount == 2);

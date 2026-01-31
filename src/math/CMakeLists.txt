@@ -11,9 +11,7 @@ target_sources(math
     FILE_SET HEADERS
     BASE_DIRS "${PROJECT_SOURCE_DIR}/src"
     FILES
-      "${CMAKE_CURRENT_SOURCE_DIR}/vec2.hpp"
-      "${CMAKE_CURRENT_SOURCE_DIR}/vec3.hpp"
-      "${CMAKE_CURRENT_SOURCE_DIR}/vec4.hpp"
+      "${CMAKE_CURRENT_SOURCE_DIR}/vec.hpp"
 )
 
 if(MV_BUILD_TESTS)

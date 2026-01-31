@@ -1,7 +1,8 @@
 #pragma once
 
-#include "math/vec2.hpp"
-#include "math/vec3.hpp"
+#include "math/vec.hpp"
+
+using namespace mv::math;
 
 struct Vertex {
     Vec3 position;

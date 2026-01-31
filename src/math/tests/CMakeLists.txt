@@ -1,5 +1,6 @@
 add_executable(mv-math-tests
   test_vec.cpp
+  test_dot.cpp
 )
 
 target_link_libraries(mv-math-tests
