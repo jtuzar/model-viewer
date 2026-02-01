@@ -14,6 +14,8 @@ target_sources(
             FILES "${CMAKE_CURRENT_SOURCE_DIR}/vec.hpp"
 )
 
+target_link_libraries(math PRIVATE glm::glm)
+
 if(MV_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
