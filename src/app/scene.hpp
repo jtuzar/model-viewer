@@ -6,7 +6,7 @@ class Scene {
    public:
     enum SceneName { defaultScene };
 
-    Scene(SceneName sceneName, Mesh& mesh) : sceneName_{sceneName}, mesh_{std::move(mesh)} {};
+    Scene(SceneName sceneName, Mesh mesh) : sceneName_{sceneName}, mesh_{std::move(mesh)} {};
 
     void render(Renderer& renderer) const;
 
