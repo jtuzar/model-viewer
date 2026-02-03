@@ -16,6 +16,7 @@ target_sources(
         opengl_context.cpp
         model.cpp
         renderer.cpp
+        shader_repository.cpp
         internal/gl_buffer.hpp
         internal/gl_buffer.cpp
     PUBLIC
@@ -27,6 +28,7 @@ target_sources(
                 "${CMAKE_CURRENT_SOURCE_DIR}/opengl_context.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/model.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/renderer.hpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/shader_repository.hpp"
 )
 
 target_link_libraries(rendering PRIVATE glad math assets)

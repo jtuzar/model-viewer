@@ -19,11 +19,12 @@ add_subdirectory(src/math)
 add_subdirectory(src/assets)
 add_subdirectory(src/rendering)
 add_subdirectory(src/platform)
+add_subdirectory(src/app)
 
 add_executable(model-viewer src/main.cpp)
 
 target_include_directories(model-viewer PRIVATE src)
-target_link_libraries(model-viewer PRIVATE platform rendering)
+target_link_libraries(model-viewer PRIVATE app)
 
 mv_enable_debug_macro(model-viewer)
 

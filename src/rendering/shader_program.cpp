@@ -64,6 +64,31 @@ ShaderProgram::ShaderProgram(std::filesystem::path vertexPath, std::filesystem::
     glDeleteShader(fragment);
 };
 
+ShaderProgram::ShaderProgram(ShaderProgram&& other) {
+    id_ = other.id_;
+    other.id_ = 0;
+}
+
+ShaderProgram& ShaderProgram::operator=(ShaderProgram&& other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    if (id_ != 0) {
+        glDeleteProgram(id_);
+    }
+
+    id_ = other.id_;
+    other.id_ = 0;
+    return *this;
+}
+
+ShaderProgram::~ShaderProgram() {
+    if (id_ != 0) {
+        glDeleteProgram(id_);
+    }
+}
+
 void ShaderProgram::use() const {
     glUseProgram(id_);
 }

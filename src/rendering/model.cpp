@@ -2,13 +2,11 @@
 #include "rendering/model.hpp"
 #include "assets/vertex.hpp"
 #include "rendering/internal/gl_buffer.hpp"
-#include "rendering/shader_program.hpp"
 #include <glad/gl.h>
 #include <cstddef>
-#include <iostream>
 
-Model::Model(const Mesh& mesh, const ShaderProgram* const shaderProgram)
-    : shaderProgram_{shaderProgram},
+Model::Model(const Mesh& mesh, const ShaderType shaderType)
+    : shaderType_{shaderType},
       vertexBuffer_{rendering::createVbo(mesh.vertices, GL_STATIC_DRAW)},
       verticesCount_{mesh.vertices.size()},
       indicesCount_{mesh.indices.size()} {
@@ -24,10 +22,5 @@ Model::Model(const Mesh& mesh, const ShaderProgram* const shaderProgram)
 };
 
 void Model::bindForDraw() const {
-    if (!shaderProgram_) {
-        std::cout << "ShaderProgram pointer is a nullptr";
-        return;
-    }
-    shaderProgram_->use();
     vertexArray_.bind();
 }
