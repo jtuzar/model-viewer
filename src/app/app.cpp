@@ -60,7 +60,7 @@ App::App(const char* appName, unsigned int windowWidth, unsigned int windowHeigh
       renderer_{glContext_} {}
 
 void App::run() {
-    Scene scene{Scene::defaultScene, testMesh};
+    Scene scene{Scene::defaultScene, std::move(testMesh)};
     scene.render(renderer_);
 
     while (!window_.shouldClose()) {
