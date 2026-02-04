@@ -16,4 +16,4 @@ target_sources(
                 "${CMAKE_CURRENT_SOURCE_DIR}/vertex.hpp"
 )
 
-target_link_libraries(assets PRIVATE math)
+target_link_libraries(assets PUBLIC glm::glm)

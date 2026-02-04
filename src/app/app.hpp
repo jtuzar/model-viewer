@@ -4,6 +4,7 @@
 #include "platform/window_context.hpp"
 #include "rendering/opengl_context.hpp"
 #include "rendering/renderer.hpp"
+
 class App {
    public:
     explicit App(const char* appName,

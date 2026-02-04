@@ -31,4 +31,4 @@ target_sources(
                 "${CMAKE_CURRENT_SOURCE_DIR}/shader_repository.hpp"
 )
 
-target_link_libraries(rendering PRIVATE glad math assets)
+target_link_libraries(rendering PRIVATE glad PUBLIC assets)

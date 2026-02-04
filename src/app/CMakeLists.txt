@@ -16,7 +16,4 @@ target_sources(
                 "${CMAKE_CURRENT_SOURCE_DIR}/camera.hpp"
 )
 
-target_link_libraries(
-    app
-    PRIVATE platform rendering math assets glm::glm
-)
+target_link_libraries(app PRIVATE platform PUBLIC rendering assets)

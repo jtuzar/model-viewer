@@ -15,7 +15,6 @@ endfunction()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(third_party)
-add_subdirectory(src/math)
 add_subdirectory(src/assets)
 add_subdirectory(src/rendering)
 add_subdirectory(src/platform)
