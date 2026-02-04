@@ -13,6 +13,10 @@ target_sources(
             FILES
                 "${CMAKE_CURRENT_SOURCE_DIR}/app.hpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/scene.hpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/camera.hpp"
 )
 
-target_link_libraries(app PRIVATE platform rendering math assets)
+target_link_libraries(
+    app
+    PRIVATE platform rendering math assets glm::glm
+)
